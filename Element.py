@@ -5,7 +5,16 @@ class Element:
 		#do things
 		#print("Element Created")
 		self.Name = Name
-		self.Valence = self.FindValenceFromName(self.Name)
+		self.Valence = 1#not needed abs(self.FindValenceFromName(self.Name))
+
+
+	def __str__(self):
+		if(self.Valence ==1 ):
+			return self.Name
+		else:
+			return self.Name + str(self.Valence)
+
+
 	def GetJsonOfElements(self):
 			with open('valence.json') as data_file:
 				data = json.load(data_file)
@@ -20,6 +29,8 @@ class Element:
 	def CheckIfValidElement(self,name):
 		data = self.GetJsonOfElements()
 		return data.has_key(name)
+
+
 
 
 if __name__ == "__main__":

@@ -5,8 +5,21 @@ class Compound:
 		self.inputstring = inputstring
 		self.inputToParse = inputstring
 		self.Elements=[]
-		self.CoValence = 0
+		self.CoValence = 1
 		self.ParseElements()
+
+
+	def __str__(self):
+		base = ""
+		for Element in self.Elements:
+			base = base + str(Element)
+
+		if(self.CoValence ==1):
+			return base
+		else:
+			return str(self.CoValence) + base
+
+
 
 	def ParseElements(self):
 		self.CoValence = int(self.GetCoValence())
@@ -15,7 +28,7 @@ class Compound:
 			self.Elements.append(Element(self.GetAndRemoveBeginningElement()))
 			if((self.inputToParse != "" and self.inputToParse[0].isdigit())):
 				valence = self.GetAndRemoveBeginningNumeric()
-				self.Elements[-1].Atoms = int(valence)
+				self.Elements[-1].Valence = int(valence)
 			
 	def GetCoValence(self):
 		self.inputToParse = self.inputToParse.strip()
@@ -38,7 +51,7 @@ class Compound:
 	def GetAndRemoveBeginningElement(self):
 		index = 0
 		alpha = ""
-		print self.inputToParse
+		
 		while(
  		self.inputToParse != ""
 		and	not self.inputToParse[index].isdigit() 
@@ -50,7 +63,7 @@ class Compound:
 if __name__ == "__main__":
 	test = " 2H2O "
 	compound = Compound(test)
-	print(compound.inputstring)
-	for element in compound.Elements:
-		print(element.Name)
+	print(test)
+	print(compound)
+	
 		
